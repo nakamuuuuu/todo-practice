@@ -27,7 +27,13 @@ class Task extends Model
 
 
     // * (findByTitle()を以下に追加する)
-
+    public function findByTitle($data)
+    {
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE title LIKE ?');
+        $stmt->execute($data);
+        $tasks = $stmt->fetchAll();
+        return $tasks;
+    }
 
 
 
